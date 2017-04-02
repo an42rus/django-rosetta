@@ -2,9 +2,8 @@
 Rosetta
 =======
 
-.. image:: https://travis-ci.org/mbi/django-rosetta.png?branch=develop
-  :target: http://travis-ci.org/mbi/django-rosetta
-
+.. image:: https://travis-ci.org/an42rus/django-rosetta.svg?branch=develop
+  :target: https://travis-ci.org/an42rus/django-rosetta
 
 Rosetta is a `Django <http://www.djangoproject.com/>`_ application that eases the translation process of your Django projects.
 
