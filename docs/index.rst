@@ -23,5 +23,6 @@ Contents:
 
    installation.rst
    settings.rst
+   angular_settings.rst
    usage.rst
    changes.rst

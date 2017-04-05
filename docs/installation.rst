@@ -19,8 +19,18 @@ Install Rosetta
         urlpatterns += patterns('',
             url(r'^rosetta/', include('rosetta.urls')),
         )
-
 Note: you can use whatever you wish as the URL prefix.
+
+4. To get translations by lang_code from Angular framework add an URL entry to your project's ``urls.py``, for example::
+
+    from django.conf import settings
+
+    if 'rosetta' in settings.INSTALLED_APPS:
+        urlpatterns += patterns('',
+            url(r'^api/translations/', include('rosetta.urls_api')),
+        )
+
+Note: you need to enable some settings.
 
 To uninstall Rosetta, simply comment out or remove the ``'rosetta'`` line in your ``INSTALLED_APPS``
 
