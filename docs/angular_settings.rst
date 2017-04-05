@@ -12,7 +12,7 @@ Angular translation Storages
 
 To prevent re-reading and parsing the PO file catalogs over and over again to get Angular translations, Rosetta stores them in a volatile location. This can be either the Django cache or something else you want.
 
-We use the Cache-based backend (by setting ``ROSETTA_ANGULAR_TRANSLATION_STORAGE_CLASS = 'rosetta.angular_translation_storage.CacheAngularTranslationStorage'``). Please make sure that a proper ``CACHES`` backend is configured in your Django settings if your Django app is being served in a multi-process environment, or the different server processes, serving subsequent requests, won't find the storage data left by previous requests.
+We use the Cache-based backend by default (``'rosetta.angular_translation_storage.CacheAngularTranslationStorage'``). Please make sure that a proper ``CACHES`` backend is configured in your Django settings if your Django app is being served in a multi-process environment, or the different server processes, serving subsequent requests, won't find the storage data left by previous requests.
 
 Alternatively you can switch to using other storage by setting ``ROSETTA_ANGULAR_TRANSLATION_STORAGE_CLASS = 'path.to.your.storage'`` in your settings.
 
