@@ -66,7 +66,7 @@ STORAGE_CLASS = getattr(settings, 'ROSETTA_STORAGE_CLASS', 'rosetta.storage.Cach
 ENABLE_REFLANG = getattr(settings, 'ROSETTA_ENABLE_REFLANG', False)
 
 # Allow overriding of the default filenames, you mostly won't need to change this
-POFILENAMES = getattr(settings, 'ROSETTA_POFILENAMES', ('django.po', 'djangojs.po'))
+POFILENAMES = getattr(settings, 'ROSETTA_POFILENAMES', ('django.po', 'djangojs.po', 'angular.po'))
 
 ROSETTA_CACHE_NAME = getattr(settings, 'ROSETTA_CACHE_NAME', 'rosetta'
                              if 'rosetta' in settings.CACHES else 'default')
@@ -88,3 +88,7 @@ ROSETTA_LANGUAGE_GROUPS = getattr(settings, 'ROSETTA_LANGUAGE_GROUPS', False)
 AUTO_COMPILE = getattr(settings, 'ROSETTA_AUTO_COMPILE', True)
 
 SHOW_AT_ADMIN_PANEL = getattr(settings, 'ROSETTA_SHOW_AT_ADMIN_PANEL', False)
+
+ENABLE_ANGULAR_TRANSLATION = getattr(settings, 'ROSETTA_ENABLE_ANGULAR_TRANSLATION', False)
+ANGULAR_TRANSLATION_FILE_PATH = getattr(settings, 'ROSETTA_ANGULAR_TRANSLATION_FILE_PATH', '')
+ANGULAR_TRANSLATION_STORAGE_CLASS = getattr(settings, 'ROSETTA_ANGULAR_TRANSLATION_STORAGE_CLASS', 'rosetta.angular_translation_storage.CacheAngularTranslationStorage')

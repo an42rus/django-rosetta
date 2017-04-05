@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 # from __future__ import unicode_literals
-import django
+
 import os
 import sys
+import django
+
+from django.utils.translation import ugettext_lazy as _
 
 
 SITE_ID = 1
@@ -28,8 +31,6 @@ CACHES = {
 }
 
 
-# CACHES = {'default': {'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}}
-
 TEST_DATABASE_CHARSET = "utf8"
 TEST_DATABASE_COLLATION = "utf8_general_ci"
 
@@ -39,6 +40,7 @@ SETTINGS_MODULE = 'testproject.settings'
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.admin',
+    'django.contrib.staticfiles',
     # 'django.contrib.admin.apps.SimpleAdminConfig',
     # 'django.contrib.redirects.apps.RedirectsConfig',
     'django.contrib.contenttypes',
@@ -114,3 +116,6 @@ SECRET_KEY = 'empty'
 ROSETTA_ENABLE_REFLANG = True
 ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS = True
 ROSETTA_SHOW_AT_ADMIN_PANEL = True
+
+ROSETTA_ENABLE_ANGULAR_TRANSLATION = True
+ROSETTA_ANGULAR_TRANSLATION_FILE_PATH = os.path.join(PROJECT_PATH, 'test_angular_translation_files', 'angular.pot')

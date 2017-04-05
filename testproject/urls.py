@@ -5,7 +5,8 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^rosetta/', include('rosetta.urls'))
+    url(r'^rosetta/', include('rosetta.urls')),
+    url(r'^api/translations/', include('rosetta.urls_api'))
 ]
 
 urlpatterns += staticfiles_urlpatterns()
