@@ -1,5 +1,5 @@
-Settings
-========
+Angular translation Settings
+============================
 
 Rosetta can be configured via the following parameters, to be defined in your project settings file:
 
@@ -7,8 +7,8 @@ Rosetta can be configured via the following parameters, to be defined in your pr
 * ``ROSETTA_ANGULAR_TRANSLATION_FILE_PATH``: Path to Angular .pot file. Defaults to ````.
 * ``ROSETTA_ANGULAR_TRANSLATION_STORAGE_CLASS``: See the note below on Storages. Defaults to ``rosetta.angular_translation_storage.CacheAngularTranslationStorage``
 
-Storages
---------
+Angular translation Storages
+----------------------------
 
 To prevent re-reading and parsing the PO file catalogs over and over again to get Angular translations, Rosetta stores them in a volatile location. This can be either the Django cache or something else you want.
 
