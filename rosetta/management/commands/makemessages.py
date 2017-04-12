@@ -8,12 +8,12 @@ import sys
 
 from django.conf import settings
 from django.core.management import CommandError
-from django.core.management.utils import handle_extensions, popen_wrapper
+from django.core.management.utils import handle_extensions
 from django.utils.text import get_text_list
 
 from rosetta.conf import settings as rosetta_settings
-from django.core.management.commands.makemessages import Command as OriginCommand, check_programs, STATUS_OK, \
-    normalize_eols
+from django.core.management.commands.makemessages import Command as OriginCommand
+from django.core.management.commands.makemessages import check_programs
 
 
 class Command(OriginCommand):
@@ -139,32 +139,11 @@ class Command(OriginCommand):
                 with io.open(pot_path, 'w', encoding='utf-8') as fp:
                     fp.write(content)
 
-    def build_potfiles(self):
+    def process_files(self, file_list):
         """
-        Build pot files and apply msguniq to them.
+            build pot files
         """
-        file_list = self.find_files(".")
-        self.remove_potfiles()
-        self.process_files(file_list)
+        super(Command, self).process_files(file_list)
 
         if self.domain == 'angular' and rosetta_settings.ENABLE_ANGULAR_TRANSLATION:
             self.copy_angular_potfile()
-
-        potfiles = []
-        for path in self.locale_paths:
-            potfile = os.path.join(path, '%s.pot' % str(self.domain))
-            if not os.path.exists(potfile):
-                continue
-            args = ['msguniq'] + self.msguniq_options + [potfile]
-            msgs, errors, status = popen_wrapper(args)
-            if errors:
-                if status != STATUS_OK:
-                    raise CommandError(
-                        "errors happened while running msguniq\n%s" % errors)
-                elif self.verbosity > 0:
-                    self.stdout.write(errors)
-            msgs = normalize_eols(msgs)
-            with io.open(potfile, 'w', encoding='utf-8') as fp:
-                fp.write(msgs)
-            potfiles.append(potfile)
-        return potfiles
