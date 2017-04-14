@@ -4,7 +4,7 @@ import polib
 from rosetta.angular_translation_storage import get_translations_storage
 
 
-def convert(po_file, encoding=None, pretty_print=False):
+def convert(po_file, lang_code, encoding=None, pretty_print=False):
     if encoding is None:
         po = polib.pofile(po_file,
                           autodetect_encoding=True)
@@ -14,6 +14,7 @@ def convert(po_file, encoding=None, pretty_print=False):
                           encoding=encoding)
 
     data = {entry.msgid: entry.msgstr for entry in po if not entry.obsolete}
+    data = {lang_code: data}
 
     if not pretty_print:
         result = json.dumps(data, ensure_ascii=False, sort_keys=True)
@@ -23,10 +24,10 @@ def convert(po_file, encoding=None, pretty_print=False):
     return result
 
 
-def put_translation_to_storage(l, po_path):
-    result = convert(po_path)
+def put_translation_to_storage(lang_code, po_path):
+    result = convert(po_path, lang_code)
     translation_storage = get_translations_storage()
-    translation_storage.set(l, result)
+    translation_storage.set(lang_code, result)
 
 
 def get_app_name(path):
