@@ -13,7 +13,7 @@ def convert(po_file, lang_code, encoding=None, pretty_print=False):
                           autodetect_encoding=False,
                           encoding=encoding)
 
-    data = {entry.msgid: entry.msgstr for entry in po if not entry.obsolete}
+    data = {entry.msgid: entry.msgstr for entry in po if entry.msgstr.strip() and not entry.obsolete}
     data = {lang_code: data}
 
     if not pretty_print:
