@@ -2,7 +2,6 @@ from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
-from django.core.management import call_command
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.encoding import iri_to_uri
@@ -14,7 +13,7 @@ from django.contrib import messages
 from rosetta.conf import settings as rosetta_settings
 from polib import pofile
 from rosetta.poutil import pagination_range, timestamp_with_timezone
-from rosetta.signals import entry_changed, post_save
+from rosetta.signals import entry_changed, post_save, reload_server
 from rosetta.storage import get_storage
 from rosetta.access import can_translate
 
@@ -174,6 +173,10 @@ def home(request):
                             put_translation_to_storage(rosetta_i18n_lang_code, rosetta_i18n_fn)
 
                     post_save.send(sender=None, language_code=rosetta_i18n_lang_code, request=request)
+
+                    if rosetta_settings.AUTO_RELOAD:
+                        reload_server.send(sender=None, request=request)
+
                     # Try auto-reloading via the WSGI daemon mode reload mechanism
                     if rosetta_settings.WSGI_AUTO_RELOAD and \
                         'mod_wsgi.process_group' in request.environ and \
