@@ -35,9 +35,18 @@
 {% endblock %}
 
 {% block main %}
-    <h1>{% blocktrans  %}Translate into {{rosetta_i18n_lang_name}}{% endblocktrans %}</h1>
-
+    <h1>{% blocktrans %}Translate into {{rosetta_i18n_lang_name}}{% endblocktrans %}</h1>
     <ul class="object-tools">
+        {% if not rosetta_settings.AUTO_RELOAD %}
+            <li class="nobubble">{% trans "Action" %}:</li>
+            <li>
+                <form id='reload-server' action="{% url 'reload_server' %}" method="post">
+                    {% csrf_token %}
+                    <a href="#">{% trans "Reload server" %}</a>
+                </form>
+            </li>
+        {% endif %}
+
         <li class="nobubble">{% trans "Display:" %}</li>
         <li {% if rosetta_i18n_filter == 'untranslated' %}class="active"{% endif %}><a href="?filter=untranslated">{% trans "Untranslated only" %}</a></li>
         <li {% if rosetta_i18n_filter == 'translated' %}class="active"{% endif %}><a href="?filter=translated">{% trans "Translated only" %}</a></li>

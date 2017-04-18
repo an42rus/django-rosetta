@@ -11,6 +11,16 @@
 {% block main %}
     <h1>&nbsp;</h1>
     <ul class="object-tools">
+        {% if not rosetta_settings.AUTO_RELOAD %}
+            <li class="nobubble">{% trans "Action" %}:</li>
+            <li>
+                <form id='reload-server' action="{% url 'reload_server' %}" method="post">
+                    {% csrf_token %}
+                    <a href="#">{% trans "Reload server" %}</a>
+                </form>
+            </li>
+        {% endif %}
+
         <li class="nobubble">{% trans "Filter" %}:</li>
         <li{% ifequal rosetta_i18n_catalog_filter 'project' %} class="active"{% endifequal %}><a href="?filter=project">{% trans "Project" %}</a></li>
         <li{% ifequal rosetta_i18n_catalog_filter 'third-party' %} class="active"{% endifequal %}><a href="?filter=third-party">{% trans "Third party" %}</a></li>

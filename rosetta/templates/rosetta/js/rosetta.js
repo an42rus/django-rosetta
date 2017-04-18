@@ -1,5 +1,25 @@
 {% load rosetta %}
 
+window.onload = function () {
+    $('#reload-server a').click(function () {
+        var url = $('#reload-server').attr('action');
+        var data = {'csrfmiddlewaretoken': $('#reload-server input[name="csrfmiddlewaretoken"]')[0].value}
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: data,
+            success: function(response) {
+                console.log('success restart');
+            },
+            error: function(response) {
+                console.log('error');
+            }
+        });
+    });
+};
+
+
 google.setOnLoadCallback(function() {
     $('.location a').show().toggle(function() {
         $('.hide', $(this).parent()).show();
