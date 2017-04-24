@@ -61,6 +61,7 @@ def list_languages(request, do_session_warn=False):
 
     return render(request, 'rosetta/languages.html', dict(
         version=rosetta.get_version(True),
+        rosetta_settings=rosetta_settings,
         ADMIN_MEDIA_PREFIX=ADMIN_MEDIA_PREFIX,
         do_session_warn=do_session_warn,
         languages=languages,
