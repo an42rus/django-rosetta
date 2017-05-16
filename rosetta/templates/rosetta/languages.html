@@ -1,6 +1,20 @@
 {% extends "rosetta/base.html" %}
 {% load i18n %}
 
+{% block header %}
+    {{block.super}}
+    <div id="user-tools">
+        <p>
+            <span>
+                <a href="{% url 'rosetta-backup-file' %}?all=true">{% trans "Backup all files" %}</a>
+            </span>
+        </p>
+    </div>
+    <script type="text/javascript">
+    </script>
+
+{% endblock %}
+
 {% block pagetitle %}{{block.super}} - {% trans "Language selection" %}{% endblock %}
 
 {% block breadcumbs %}

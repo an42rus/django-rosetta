@@ -113,8 +113,28 @@ TEMPLATES = [
 
 STATIC_URL = '/static/'
 
-# SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
-# ROSETTA_STORAGE_CLASS = 'rosetta.storage.SessionRosettaStorage'
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'DEBUG',
+        'handlers': ['console'],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s '
+                      '%(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+}
 
 ROSETTA_STORAGE_CLASS = 'rosetta.storage.CacheRosettaStorage'
 SECRET_KEY = 'empty'
@@ -125,3 +145,4 @@ ROSETTA_SHOW_AT_ADMIN_PANEL = True
 
 ROSETTA_ENABLE_ANGULAR_TRANSLATION = True
 ROSETTA_ANGULAR_TRANSLATION_FILE_PATH = os.path.join(PROJECT_PATH, 'test_angular_translation_files', 'angular.pot')
+
