@@ -46,10 +46,10 @@ def get_app_name(path):
 
 def backup_all_po_files_to_db():
     for lang, lang_name in settings.LANGUAGES:
-        backup_po_to_db_by_language(lang)
+        backup_po_to_db_by_language_and_domains(lang)
 
 
-def backup_po_to_db_by_language(language):
+def backup_po_to_db_by_language_and_domains(language, domains=['django', 'djangojs', 'angular']):
     """ Backup Po file to db model by language"""
 
     available_langs = dict(settings.LANGUAGES)
@@ -64,13 +64,14 @@ def backup_po_to_db_by_language(language):
             logger.debug("Backuping %s" % pofile)
 
             domain = os.path.splitext(os.path.basename(pofile))[0]
-            with codecs.open(pofile, 'r', 'utf-8') as pofile_opened:
-                content = pofile_opened.read()
+            if domain in domains:
+                with codecs.open(pofile, 'r', 'utf-8') as pofile_opened:
+                    content = pofile_opened.read()
 
-                backup = TranslationBackup(
-                    language=language,
-                    locale_path=path,
-                    domain=domain,
-                    content=content,
-                )
-                backup.save()
+                    backup = TranslationBackup(
+                        language=language,
+                        locale_path=path,
+                        domain=domain,
+                        content=content,
+                    )
+                    backup.save()
