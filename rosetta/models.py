@@ -4,8 +4,6 @@ import polib
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from rosetta.utils import put_translation_to_storage
-
 
 class TranslationBackup(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -41,6 +39,7 @@ class TranslationBackup(models.Model):
         po.save_as_mofile(mo_filename)
 
         if self.domain == 'angular':
+            from rosetta.utils import put_translation_to_storage
             put_translation_to_storage(self.language, po_filename)
 
     def __unicode__(self):

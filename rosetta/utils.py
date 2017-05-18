@@ -8,7 +8,7 @@ import polib
 from django.conf import settings
 
 from rosetta.angular_translation_storage import get_translations_storage
-from rosetta.models import TranslationBackup
+
 
 logger = logging.getLogger()
 
@@ -51,6 +51,7 @@ def backup_all_po_files_to_db():
 
 def backup_po_to_db_by_language_and_domains(language, domains=['django', 'djangojs', 'angular']):
     """ Backup Po file to db model by language"""
+    from rosetta.models import TranslationBackup
 
     available_langs = dict(settings.LANGUAGES)
     if language not in available_langs:
