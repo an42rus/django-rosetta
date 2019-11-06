@@ -1,10 +1,7 @@
 from django.conf.urls import url
 from django.contrib import admin
+from django.urls import reverse_lazy
 
-try:
-    from django.urls import reverse_lazy
-except:
-    from django.core.urlresolvers import reverse_lazy
 
 from django.views.generic import RedirectView
 

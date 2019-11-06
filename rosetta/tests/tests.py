@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from django.core.urlresolvers import reverse, resolve
+from django.urls import reverse, resolve
 from django.core.exceptions import ImproperlyConfigured
 from django.core.cache import cache
 from django.test import TestCase
@@ -590,7 +590,7 @@ class RosettaTestCase(TestCase):
         self.assertTrue('<li class="active"><a href="?filter=third-party">' in str(r.content))
 
     def test_29_unsupported_p3_django_16_storage(self):
-        if django.VERSION[0:2] >= (1, 6):
+        if django.VERSION[0:2] < (2, 0):
             self.assertTrue('django.contrib.sessions.middleware.SessionMiddleware' in settings.MIDDLEWARE_CLASSES)
 
             settings.SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"

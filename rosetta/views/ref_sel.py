@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import Http404, HttpResponseRedirect
 from django.views.decorators.cache import never_cache
 

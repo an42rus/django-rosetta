@@ -60,7 +60,7 @@ if django.VERSION[0:2] >= (1, 7):
 
 LANGUAGE_CODE = "en"
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
