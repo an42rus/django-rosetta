@@ -7,7 +7,6 @@ from django.core.management.base import CommandError
 from django.core.management.commands.compilemessages import Command as OriginCommand
 from django.core.management.commands.compilemessages import has_bom
 from django.core.management.utils import find_command
-from django.utils._os import upath
 
 from rosetta.conf import settings as rosetta_settings
 from rosetta.utils import put_translation_to_storage
@@ -28,7 +27,7 @@ class Command(OriginCommand):
         basedirs = [os.path.join('conf', 'locale'), 'locale']
         if os.environ.get('DJANGO_SETTINGS_MODULE'):
             from django.conf import settings
-            basedirs.extend(upath(path) for path in settings.LOCALE_PATHS)
+            basedirs.extend(path for path in settings.LOCALE_PATHS)
 
         # Walk entire tree, looking for locale directories
         for dirpath, dirnames, filenames in os.walk('.', topdown=True):
